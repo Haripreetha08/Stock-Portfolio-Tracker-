@@ -1,0 +1,23 @@
+stock_prices={"AAPL": 180, "TSLA": 250, "GOOGL":480, "AMZN" :100, "MSFT":500}
+portfolio = {}
+while True:
+    stock_name = input("Enter stock name:")
+    if stock_name =="done":
+        break
+    if stock_name != "done" and stock_name not in stock_prices:
+        print("Stock not found! Available stocks: AAPL, TSLA, GOOGL, AMZN, MSFT")
+        continue
+    quantity = int(input("Enter the quantity:"))
+    portfolio[stock_name]=quantity 
+total=0
+for stock_name, quantity in portfolio.items():
+   price = stock_prices[stock_name]
+   total=total+(price*quantity)
+   print(f"{stock_name} - {quantity} shares = ${price * quantity}")
+print("Total investment:",total)
+
+with open("portfolio.txt", "w") as f:
+    for stock_name, quantity in portfolio.items():
+        price = stock_prices[stock_name]
+        f.write(f"{stock_name} - {quantity} shares = ${price * quantity}\n")
+    f.write(f"Total investment: ${total}\n")
